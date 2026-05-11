@@ -10,18 +10,27 @@
   <header class="app-header">
     <div>
       <p class="eyebrow">CareerFit Workflow Tool</p>
-      <h1>Career Experience Matcher</h1>
+      <h1 data-i18n="mainTitle">Career Experience Matcher</h1>
     </div>
-    <div class="stats" aria-live="polite">
-      <span id="totalCount">0</span>
-      <small data-i18n="experienceCountLabel">experiences</small>
+    <div class="header-controls">
+      <label class="language-selector global-language-selector">
+        <span data-i18n="languageLabel">Language</span>
+        <select id="outputLanguage">
+          <option value="en" selected>English</option>
+          <option value="zh">中文</option>
+        </select>
+      </label>
+      <div class="stats" aria-live="polite">
+        <span id="totalCount">0</span>
+        <small data-i18n="experienceCountLabel">experiences</small>
+      </div>
     </div>
   </header>
 
   <main>
     <section class="privacy-notice" aria-label="Privacy note">
-      <strong>Privacy-first career workspace</strong>
-      <p>Your experiences are stored locally in this browser. No account or server upload is required. You can use fictional sample data or add your own non-sensitive sample experiences.</p>
+      <strong data-i18n="privacyTitle">Privacy-first career workspace</strong>
+      <p data-i18n="privacyBody">Your experiences are stored locally in this browser. No account or server upload is required. You can use fictional sample data or add your own non-sensitive sample experiences.</p>
     </section>
 
     <section class="panel">
@@ -34,12 +43,12 @@
         <div class="form-grid">
           <label>
             <span data-i18n="experienceTitle">Experience title</span>
-            <input id="title" name="title" type="text" placeholder="Example: Campus content operations project" required>
+            <input id="title" name="title" type="text" placeholder="Example: Campus content operations project" data-i18n-placeholder="titlePlaceholder" required>
           </label>
 
           <label>
             <span data-i18n="time">Time</span>
-            <input id="time" name="time" type="text" placeholder="Example: 2025.03 - 2025.06" required>
+            <input id="time" name="time" type="text" placeholder="Example: 2025.03 - 2025.06" data-i18n-placeholder="timePlaceholder" required>
           </label>
 
           <label>
@@ -66,15 +75,15 @@
 
         <label>
           <span data-i18n="experienceDescription">Experience description</span>
-          <textarea id="experienceDescription" name="experienceDescription" rows="7" placeholder="Describe the context, responsibility, action, and outcome. Add numbers when possible." required></textarea>
+          <textarea id="experienceDescription" name="experienceDescription" rows="7" placeholder="Describe the context, responsibility, action, and outcome. Add numbers when possible." data-i18n-placeholder="experienceDescriptionPlaceholder" required></textarea>
         </label>
 
         <div class="writing-guide">
-          <strong>Prompt</strong>
-          <p>Use this shape: In [context], I was responsible for [task]. I did [actions]. The result was [outcome or metric].</p>
+          <strong data-i18n="promptTitle">Prompt</strong>
+          <p data-i18n="promptHelp">Use this shape: In [context], I was responsible for [task]. I did [actions]. The result was [outcome or metric].</p>
           <details>
-            <summary>View fictional example</summary>
-            <p>In a campus product research project, I helped review student feedback for a learning app prototype. I grouped 80 survey responses, summarized recurring usability issues, and created a short priority list for the design team. The final recommendation helped reduce the onboarding flow from six screens to four.</p>
+            <summary data-i18n="viewFictionalExample">View fictional example</summary>
+            <p data-i18n="fictionalExample">In a campus product research project, I helped review student feedback for a learning app prototype. I grouped 80 survey responses, summarized recurring usability issues, and created a short priority list for the design team. The final recommendation helped reduce the onboarding flow from six screens to four.</p>
           </details>
         </div>
 
@@ -84,22 +93,22 @@
         <div class="star-grid generated-star-grid" aria-label="Generated STAR content">
           <label>
             <span data-i18n="situation">Situation</span>
-            <textarea id="situation" name="situation" rows="4" placeholder="Generated from the description."></textarea>
+            <textarea id="situation" name="situation" rows="4" placeholder="Generated from the description." data-i18n-placeholder="generatedPlaceholder"></textarea>
           </label>
 
           <label>
             <span data-i18n="task">Task</span>
-            <textarea id="task" name="task" rows="4" placeholder="Generated from the description."></textarea>
+            <textarea id="task" name="task" rows="4" placeholder="Generated from the description." data-i18n-placeholder="generatedPlaceholder"></textarea>
           </label>
 
           <label>
             <span data-i18n="action">Action</span>
-            <textarea id="action" name="action" rows="4" placeholder="Generated from the description."></textarea>
+            <textarea id="action" name="action" rows="4" placeholder="Generated from the description." data-i18n-placeholder="generatedPlaceholder"></textarea>
           </label>
 
           <label>
             <span data-i18n="result">Result</span>
-            <textarea id="result" name="result" rows="4" placeholder="Generated from the description."></textarea>
+            <textarea id="result" name="result" rows="4" placeholder="Generated from the description." data-i18n-placeholder="generatedPlaceholder"></textarea>
           </label>
         </div>
 
@@ -114,7 +123,7 @@
       </div>
 
       <details class="jd-example">
-        <summary>View fictional JD example</summary>
+        <summary data-i18n="viewFictionalJd">View fictional JD example</summary>
         <div class="jd-example-content">
           <pre id="sampleJobDescription">Role: Content Operations Intern
 
@@ -129,26 +138,18 @@ Requirements:
 2. Familiar with social media platforms and short-video workflows;
 3. Detail-oriented, reliable, and able to execute on schedule;
 4. Experience with Excel, Canva, CapCut, or AI tools is a plus.</pre>
-          <button class="secondary-button" id="useSampleJobButton" type="button">Use This JD</button>
+          <button class="secondary-button" id="useSampleJobButton" type="button" data-i18n="useThisJd">Use This JD</button>
         </div>
       </details>
 
       <label>
         <span data-i18n="jobDescription">Job description</span>
-        <textarea id="jobDescription" rows="7" placeholder="Paste responsibilities, requirements, bonus qualifications, and role keywords."></textarea>
+        <textarea id="jobDescription" rows="7" placeholder="Paste responsibilities, requirements, bonus qualifications, and role keywords." data-i18n-placeholder="jobDescriptionPlaceholder"></textarea>
       </label>
       <button class="secondary-button jd-clear-button" id="clearJobDescriptionButton" type="button" data-i18n="clearJd">Clear JD</button>
 
-      <label class="language-selector">
-        <span data-i18n="outputLanguage">Output language</span>
-        <select id="outputLanguage">
-          <option value="en" selected>English</option>
-          <option value="zh">Chinese</option>
-        </select>
-      </label>
-
       <button class="primary-button" id="analyzeMatchButton" type="button" data-i18n="analyzeAndMatch">Analyze And Match</button>
-      <p class="match-tip">The matching logic uses a local keyword library and rule-based scoring. No API key or backend is required.</p>
+      <p class="match-tip" data-i18n="matchTip">The matching logic uses a local keyword library and rule-based scoring. No API key or backend is required.</p>
 
       <div class="match-results-toolbar" id="matchResultsToolbar" hidden>
         <p id="matchStatus" class="match-status" aria-live="polite"></p>
@@ -162,42 +163,42 @@ Requirements:
 
     <section class="backup-panel panel" aria-labelledby="dataTitle">
       <details class="advanced-backup">
-        <summary id="dataTitle">Advanced: Local Data Management</summary>
-        <p class="export-note">Import sample JSON, export local career workspace data, or clear browser storage.</p>
+        <summary id="dataTitle" data-i18n="advancedDataTitle">Advanced: Local Data Management</summary>
+        <p class="export-note" data-i18n="advancedDataHelp">Import sample JSON, export local career workspace data, or clear browser storage.</p>
 
-        <button class="primary-button" id="exportDataButton" type="button">Export Local Data</button>
+        <button class="primary-button" id="exportDataButton" type="button" data-i18n="exportLocalData">Export Local Data</button>
 
         <details class="advanced-backup">
-          <summary>Import JSON Data</summary>
+          <summary data-i18n="importJsonData">Import JSON Data</summary>
         <div class="backup-steps">
           <div class="backup-step import-step" id="importDropZone">
-            <span>Select JSON file</span>
+            <span data-i18n="selectJsonFile">Select JSON file</span>
             <div class="import-file-row">
-              <label class="file-pick-button" for="importDataInput">Choose File</label>
+              <label class="file-pick-button" for="importDataInput" data-i18n="chooseFile">Choose File</label>
               <input id="importDataInput" class="plain-file-input" type="file" accept="application/json,.json">
-              <strong id="selectedImportFileName" class="selected-file-name">No file selected</strong>
+              <strong id="selectedImportFileName" class="selected-file-name" data-empty-text="true">No file selected</strong>
             </div>
-            <p class="drop-hint">You can also drag a .json file here.</p>
+            <p class="drop-hint" data-i18n="dropHint">You can also drag a .json file here.</p>
           </div>
           <div class="backup-step">
-            <span>Import selected file</span>
-            <button class="secondary-button" id="importDataButton" type="button">Import Data</button>
+            <span data-i18n="importSelectedFile">Import selected file</span>
+            <button class="secondary-button" id="importDataButton" type="button" data-i18n="importData">Import Data</button>
           </div>
         </div>
         </details>
-        <button class="danger-button clear-data-button" id="clearLocalDataButton" type="button">Clear Browser Data</button>
+        <button class="danger-button clear-data-button" id="clearLocalDataButton" type="button" data-i18n="clearBrowserData">Clear Browser Data</button>
       </details>
       <p id="backupStatus" class="backup-status" aria-live="polite"></p>
     </section>
 
     <section class="toolbar" aria-label="Search and filters">
       <label>
-        Keyword search
-        <input id="searchInput" type="search" placeholder="Search title, tags, direction, STAR content">
+        <span data-i18n="keywordSearch">Keyword search</span>
+        <input id="searchInput" type="search" placeholder="Search title, tags, direction, STAR content" data-i18n-placeholder="searchPlaceholder">
       </label>
 
       <label>
-        Type filter
+        <span data-i18n="typeFilter">Type filter</span>
         <select id="typeFilter">
           <option value="全部">All</option>
           <option value="实习">Internship</option>
@@ -213,12 +214,12 @@ Requirements:
       </label>
 
       <label>
-        Direction filter
+        <span data-i18n="directionFilter">Direction filter</span>
         <select id="directionFilter"></select>
       </label>
 
       <label>
-        Ability filter
+        <span data-i18n="abilityFilter">Ability filter</span>
         <select id="abilityFilter"></select>
       </label>
     </section>

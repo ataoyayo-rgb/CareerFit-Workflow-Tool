@@ -42,6 +42,27 @@ textarea {
   border-bottom: 1px solid var(--line);
 }
 
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.global-language-selector {
+  min-width: 150px;
+  margin: 0;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.global-language-selector select {
+  margin-top: 4px;
+}
+
 .eyebrow {
   margin: 0 0 6px;
   color: var(--accent);
