@@ -66,6 +66,27 @@ Expected sample recommendation order:
 3. `Fictional Learning App User Research`
 
 The first recommendation should produce role-aware resume bullets, interview material, and cover-letter material for a Marketing Communications Assistant role.
+## Screenshots
+
+### Home
+
+![Home](screenshots/01-home.png)
+
+### Add Experience
+
+![Add Experience](screenshots/02-add-experience.png)
+
+### Experience Library
+
+![Experience Library](screenshots/03-demo-experience-library.png)
+
+### Job Analysis Results
+
+![Job Analysis Results](screenshots/04-job-analysis-results.png)
+
+### Resume Bullet Output
+
+![Resume Bullets](screenshots/05-resume-bullets.png)
 
 ## Privacy & Data Storage
 
