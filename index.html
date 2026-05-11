@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerFit Workflow Tool</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">CareerFit Workflow Tool</p>
+      <h1>Career Experience Matcher</h1>
+    </div>
+    <div class="stats" aria-live="polite">
+      <span id="totalCount">0</span>
+      <small data-i18n="experienceCountLabel">experiences</small>
+    </div>
+  </header>
+
+  <main>
+    <section class="privacy-notice" aria-label="Privacy note">
+      <strong>Privacy-first career workspace</strong>
+      <p>Your experiences are stored locally in this browser. No account or server upload is required. You can use fictional sample data or add your own non-sensitive sample experiences.</p>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <h2 data-i18n="addExperience">Add Experience</h2>
+        <p data-i18n="addExperienceHelp">Write a raw experience once, then structure it into STAR and job-search outputs.</p>
+      </div>
+
+      <form id="experienceForm" class="experience-form">
+        <div class="form-grid">
+          <label>
+            <span data-i18n="experienceTitle">Experience title</span>
+            <input id="title" name="title" type="text" placeholder="Example: Campus content operations project" required>
+          </label>
+
+          <label>
+            <span data-i18n="time">Time</span>
+            <input id="time" name="time" type="text" placeholder="Example: 2025.03 - 2025.06" required>
+          </label>
+
+          <label>
+            <span data-i18n="experienceType">Experience type</span>
+            <select id="type" name="type" required>
+              <option value="实习">Internship</option>
+              <option value="兼职">Part-time</option>
+              <option value="正式工作">Full-time</option>
+              <option value="项目经历">Project</option>
+              <option value="校园经历">Campus</option>
+            </select>
+          </label>
+        </div>
+
+        <fieldset>
+          <legend data-i18n="abilityTags">Ability tags</legend>
+          <div class="tag-options" id="tagOptions"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend data-i18n="roleDirectionTags">Role direction tags</legend>
+          <div class="tag-options" id="directionTagOptions"></div>
+        </fieldset>
+
+        <label>
+          <span data-i18n="experienceDescription">Experience description</span>
+          <textarea id="experienceDescription" name="experienceDescription" rows="7" placeholder="Describe the context, responsibility, action, and outcome. Add numbers when possible." required></textarea>
+        </label>
+
+        <div class="writing-guide">
+          <strong>Prompt</strong>
+          <p>Use this shape: In [context], I was responsible for [task]. I did [actions]. The result was [outcome or metric].</p>
+          <details>
+            <summary>View fictional example</summary>
+            <p>In a campus product research project, I helped review student feedback for a learning app prototype. I grouped 80 survey responses, summarized recurring usability issues, and created a short priority list for the design team. The final recommendation helped reduce the onboarding flow from six screens to four.</p>
+          </details>
+        </div>
+
+        <button class="secondary-button" id="generateStarButton" type="button" data-i18n="generateStar">Generate STAR</button>
+        <p id="starGenerationStatus" class="form-status" aria-live="polite"></p>
+
+        <div class="star-grid generated-star-grid" aria-label="Generated STAR content">
+          <label>
+            <span data-i18n="situation">Situation</span>
+            <textarea id="situation" name="situation" rows="4" placeholder="Generated from the description."></textarea>
+          </label>
+
+          <label>
+            <span data-i18n="task">Task</span>
+            <textarea id="task" name="task" rows="4" placeholder="Generated from the description."></textarea>
+          </label>
+
+          <label>
+            <span data-i18n="action">Action</span>
+            <textarea id="action" name="action" rows="4" placeholder="Generated from the description."></textarea>
+          </label>
+
+          <label>
+            <span data-i18n="result">Result</span>
+            <textarea id="result" name="result" rows="4" placeholder="Generated from the description."></textarea>
+          </label>
+        </div>
+
+        <button class="primary-button" type="submit" data-i18n="addExperienceButton">Add Experience</button>
+      </form>
+    </section>
+
+    <section class="job-match panel" aria-labelledby="jobMatchTitle">
+      <div class="section-heading">
+        <h2 id="jobMatchTitle" data-i18n="jobMatchTitle">Match Experiences To A Job Description</h2>
+        <p data-i18n="jobMatchHelp">Paste a target JD. The tool identifies role signals and recommends the strongest experience materials.</p>
+      </div>
+
+      <details class="jd-example">
+        <summary>View fictional JD example</summary>
+        <div class="jd-example-content">
+          <pre id="sampleJobDescription">Role: Content Operations Intern
+
+Responsibilities:
+1. Support Xiaohongshu, Douyin, and WeChat content planning and publishing;
+2. Organize topic ideas, short-video materials, and weekly content performance data;
+3. Track comments and user feedback to improve engagement;
+4. Assist campaign execution, content calendar updates, and post-campaign review.
+
+Requirements:
+1. Strong writing, communication, and information organization skills;
+2. Familiar with social media platforms and short-video workflows;
+3. Detail-oriented, reliable, and able to execute on schedule;
+4. Experience with Excel, Canva, CapCut, or AI tools is a plus.</pre>
+          <button class="secondary-button" id="useSampleJobButton" type="button">Use This JD</button>
+        </div>
+      </details>
+
+      <label>
+        <span data-i18n="jobDescription">Job description</span>
+        <textarea id="jobDescription" rows="7" placeholder="Paste responsibilities, requirements, bonus qualifications, and role keywords."></textarea>
+      </label>
+      <button class="secondary-button jd-clear-button" id="clearJobDescriptionButton" type="button" data-i18n="clearJd">Clear JD</button>
+
+      <label class="language-selector">
+        <span data-i18n="outputLanguage">Output language</span>
+        <select id="outputLanguage">
+          <option value="en" selected>English</option>
+          <option value="zh">Chinese</option>
+        </select>
+      </label>
+
+      <button class="primary-button" id="analyzeMatchButton" type="button" data-i18n="analyzeAndMatch">Analyze And Match</button>
+      <p class="match-tip">The matching logic uses a local keyword library and rule-based scoring. No API key or backend is required.</p>
+
+      <div class="match-results-toolbar" id="matchResultsToolbar" hidden>
+        <p id="matchStatus" class="match-status" aria-live="polite"></p>
+        <div class="match-toolbar-actions">
+          <button class="secondary-button" id="reanalyzeMatchButton" type="button" hidden data-i18n="analyzeAgain">Analyze Again</button>
+          <button class="danger-light-button" id="clearMatchResultsButton" type="button" data-i18n="clearResults">Clear Results</button>
+        </div>
+      </div>
+      <div id="matchResults" class="match-results" aria-live="polite"></div>
+    </section>
+
+    <section class="backup-panel panel" aria-labelledby="dataTitle">
+      <details class="advanced-backup">
+        <summary id="dataTitle">Advanced: Local Data Management</summary>
+        <p class="export-note">Import sample JSON, export local career workspace data, or clear browser storage.</p>
+
+        <button class="primary-button" id="exportDataButton" type="button">Export Local Data</button>
+
+        <details class="advanced-backup">
+          <summary>Import JSON Data</summary>
+        <div class="backup-steps">
+          <div class="backup-step import-step" id="importDropZone">
+            <span>Select JSON file</span>
+            <div class="import-file-row">
+              <label class="file-pick-button" for="importDataInput">Choose File</label>
+              <input id="importDataInput" class="plain-file-input" type="file" accept="application/json,.json">
+              <strong id="selectedImportFileName" class="selected-file-name">No file selected</strong>
+            </div>
+            <p class="drop-hint">You can also drag a .json file here.</p>
+          </div>
+          <div class="backup-step">
+            <span>Import selected file</span>
+            <button class="secondary-button" id="importDataButton" type="button">Import Data</button>
+          </div>
+        </div>
+        </details>
+        <button class="danger-button clear-data-button" id="clearLocalDataButton" type="button">Clear Browser Data</button>
+      </details>
+      <p id="backupStatus" class="backup-status" aria-live="polite"></p>
+    </section>
+
+    <section class="toolbar" aria-label="Search and filters">
+      <label>
+        Keyword search
+        <input id="searchInput" type="search" placeholder="Search title, tags, direction, STAR content">
+      </label>
+
+      <label>
+        Type filter
+        <select id="typeFilter">
+          <option value="全部">All</option>
+          <option value="实习">Internship</option>
+          <option value="兼职">Part-time</option>
+          <option value="正式工作">Full-time</option>
+          <option value="项目经历">Project</option>
+          <option value="校园经历">Campus</option>
+          <option value="课程项目">Academic project</option>
+          <option value="AI 项目">AI project</option>
+          <option value="学生经历">Student experience</option>
+          <option value="其他">Other</option>
+        </select>
+      </label>
+
+      <label>
+        Direction filter
+        <select id="directionFilter"></select>
+      </label>
+
+      <label>
+        Ability filter
+        <select id="abilityFilter"></select>
+      </label>
+    </section>
+
+    <section class="list-section">
+      <div class="section-heading">
+        <h2 data-i18n="experienceLibrary">Experience Library</h2>
+        <p id="visibleCount">Showing 0 items</p>
+      </div>
+      <div id="experienceList" class="experience-list"></div>
+      <p id="emptyState" class="empty-state">No experiences yet. Import sample data or add your own non-sensitive sample experience.</p>
+    </section>
+  </main>
+
+  <script src="./job-keyword-library.js"></script>
+  <script src="./bullet-pattern-library.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

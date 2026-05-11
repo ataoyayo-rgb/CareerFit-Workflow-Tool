@@ -1,0 +1,14 @@
+Role: Frontend Developer Intern
+
+Responsibilities:
+- Build and maintain interactive web interface components
+- Work with JavaScript, HTML, CSS, and frontend frameworks
+- Connect user inputs with local or API-based data flows
+- Debug interface issues and improve usability
+- Write simple documentation for features and user flows
+
+Requirements:
+- Basic understanding of JavaScript, HTML, and CSS
+- Familiarity with React, Vue, or similar frameworks is a plus
+- Ability to test and debug frontend interactions
+- Interest in user experience and workflow tools

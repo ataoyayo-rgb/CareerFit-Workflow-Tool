@@ -1,0 +1,49 @@
+{
+  "app": "CareerFit Workflow Tool",
+  "version": 1,
+  "description": "Fictional demo data for public portfolio and GitHub Pages usage.",
+  "experiences": [
+    {
+      "id": "demo-content-operations",
+      "title": "Fictional Campus Content Operations Project",
+      "time": "2025.03 - 2025.06",
+      "type": "Project",
+      "tags": ["Content", "Operations", "Data", "Execution", "Communication"],
+      "directionTags": ["Content / New Media", "Marketing / Branding", "Operations"],
+      "experienceDescription": "Worked on a fictional campus content operations project, organising topic feedback, short-video materials, and content performance notes. Reviewed around 60 user comments, categorised issues related to topics, messaging, posting time, and engagement, and used Excel to record content performance. The team adjusted 4 topic directions based on the review, and engagement increased by around 18% over the following two weeks.",
+      "situation": "Worked on a fictional campus content operations project focused on improving content engagement.",
+      "task": "Organised topic feedback, short-video materials, and content performance notes.",
+      "action": "Reviewed around 60 user comments, categorised issues related to topics, messaging, posting time, and engagement, and used Excel to record content performance.",
+      "result": "The team adjusted 4 topic directions based on the review, and engagement increased by around 18% over the following two weeks.",
+      "createdAt": "2026-01-15T09:00:00.000Z"
+    },
+    {
+      "id": "demo-product-research",
+      "title": "Fictional Learning App User Research",
+      "time": "2025.07 - 2025.08",
+      "type": "Project",
+      "tags": ["Data", "Logical Analysis", "Problem-solving", "Attention to Detail"],
+      "directionTags": ["Product", "Data / Analytics"],
+      "experienceDescription": "Supported a fictional learning app prototype research project by reviewing 80 student survey responses and 12 interview notes. Categorised feedback into onboarding, course search, learning reminders, and progress tracking issues, then helped create a prioritised improvement list. The team reduced the new-user onboarding flow from 6 screens to 4 screens, shortening prototype testing time by about 25%.",
+      "situation": "Supported a fictional learning app prototype research project focused on onboarding and usability issues.",
+      "task": "Reviewed 80 student survey responses and 12 interview notes.",
+      "action": "Categorised feedback into onboarding, course search, learning reminders, and progress tracking issues, then helped create a prioritised improvement list.",
+      "result": "The team reduced the new-user onboarding flow from 6 screens to 4 screens, shortening prototype testing time by about 25%.",
+      "createdAt": "2026-01-16T09:00:00.000Z"
+    },
+    {
+      "id": "demo-ai-workflow",
+      "title": "Fictional AI Resume Workflow Prototype",
+      "time": "2025.10 - 2025.11",
+      "type": "AI Project",
+      "tags": ["AI", "Problem-solving", "Learning Agility", "Execution", "Operations"],
+      "directionTags": ["AI / Automation", "Operations", "Tech / Internet"],
+      "experienceDescription": "Built a fictional AI-assisted resume workflow prototype to help users structure experiences, compare them with job descriptions, and draft resume bullet points. Tested the workflow with small user samples, collected feedback on unclear steps and output quality, and iterated on the experience input, JD matching, and bullet generation logic.",
+      "situation": "Built a fictional AI-assisted resume workflow prototype for career-material drafting.",
+      "task": "Helped users structure experiences, compare them with job descriptions, and draft resume bullet points.",
+      "action": "Tested the workflow with small user samples, collected feedback on unclear steps and output quality, and iterated on the experience input, JD matching, and bullet generation logic.",
+      "result": "The prototype improved the clarity of the experience input, JD matching, and bullet generation workflow.",
+      "createdAt": "2026-01-17T09:00:00.000Z"
+    }
+  ]
+}

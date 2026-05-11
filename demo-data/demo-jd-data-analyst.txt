@@ -1,0 +1,14 @@
+Role: Data Analyst Intern
+
+Responsibilities:
+- Clean and organise raw data for reporting
+- Use Excel, SQL, or Python to analyse trends
+- Build simple dashboards or reports
+- Track KPIs and support business decisions
+- Communicate findings to non-technical stakeholders
+
+Requirements:
+- Basic Excel and data analysis skills
+- SQL or Python experience is a plus
+- Ability to explain findings clearly
+- Attention to detail and logical thinking
