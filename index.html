@@ -33,6 +33,36 @@
       <p data-i18n="privacyBody">Your experiences are stored locally in this browser. No account or server upload is required. You can use fictional sample data or add your own non-sensitive sample experiences.</p>
     </section>
 
+    <section class="panel demo-workflow" aria-labelledby="demoWorkflowTitle">
+      <div class="section-heading">
+        <h2 id="demoWorkflowTitle" data-i18n="demoWorkflowTitle">Try the demo workflow</h2>
+        <p data-i18n="demoWorkflowNote">Demo experiences and demo JDs are fictional and safe for testing.</p>
+      </div>
+
+      <div class="demo-steps">
+        <div class="demo-step">
+          <strong data-i18n="demoStepOne">Step 1: Load fictional demo experiences</strong>
+          <button class="secondary-button" id="loadDemoExperiencesButton" type="button" data-i18n="loadDemoExperiences">Load Demo Experiences</button>
+          <p class="form-status" id="demoExperienceStatus" aria-live="polite"></p>
+        </div>
+
+        <div class="demo-step">
+          <strong data-i18n="demoStepTwo">Step 2: Choose a demo job description</strong>
+          <label>
+            <span data-i18n="demoJdChoose">Choose a fictional JD:</span>
+            <select id="demoJobSelect"></select>
+          </label>
+          <button class="secondary-button" id="useSampleJobButton" type="button" data-i18n="useSelectedDemoJd">Use Selected Demo JD</button>
+          <p class="form-status" id="demoJobStatus" aria-live="polite"></p>
+        </div>
+
+        <div class="demo-step">
+          <strong data-i18n="demoStepThree">Step 3: Click Analyze And Match</strong>
+          <p class="demo-jd-note" data-i18n="demoJdNote">For the best demo result, load the fictional demo experiences first.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="panel">
       <div class="section-heading">
         <h2 data-i18n="addExperience">Add Experience</h2>
@@ -122,26 +152,6 @@
         <p data-i18n="jobMatchHelp">Paste a target JD. The tool identifies role signals and recommends the strongest experience materials.</p>
       </div>
 
-      <details class="jd-example">
-        <summary data-i18n="viewFictionalJd">View fictional JD example</summary>
-        <div class="jd-example-content">
-          <pre id="sampleJobDescription">Role: Content Operations Intern
-
-Responsibilities:
-1. Support Xiaohongshu, Douyin, and WeChat content planning and publishing;
-2. Organize topic ideas, short-video materials, and weekly content performance data;
-3. Track comments and user feedback to improve engagement;
-4. Assist campaign execution, content calendar updates, and post-campaign review.
-
-Requirements:
-1. Strong writing, communication, and information organization skills;
-2. Familiar with social media platforms and short-video workflows;
-3. Detail-oriented, reliable, and able to execute on schedule;
-4. Experience with Excel, Canva, CapCut, or AI tools is a plus.</pre>
-          <button class="secondary-button" id="useSampleJobButton" type="button" data-i18n="useThisJd">Use This JD</button>
-        </div>
-      </details>
-
       <label>
         <span data-i18n="jobDescription">Job description</span>
         <textarea id="jobDescription" rows="7" placeholder="Paste responsibilities, requirements, bonus qualifications, and role keywords." data-i18n-placeholder="jobDescriptionPlaceholder"></textarea>
@@ -159,36 +169,6 @@ Requirements:
         </div>
       </div>
       <div id="matchResults" class="match-results" aria-live="polite"></div>
-    </section>
-
-    <section class="backup-panel panel" aria-labelledby="dataTitle">
-      <details class="advanced-backup">
-        <summary id="dataTitle" data-i18n="advancedDataTitle">Advanced: Local Data Management</summary>
-        <p class="export-note" data-i18n="advancedDataHelp">Import sample JSON, export local career workspace data, or clear browser storage.</p>
-
-        <button class="primary-button" id="exportDataButton" type="button" data-i18n="exportLocalData">Export Local Data</button>
-
-        <details class="advanced-backup">
-          <summary data-i18n="importJsonData">Import JSON Data</summary>
-        <div class="backup-steps">
-          <div class="backup-step import-step" id="importDropZone">
-            <span data-i18n="selectJsonFile">Select JSON file</span>
-            <div class="import-file-row">
-              <label class="file-pick-button" for="importDataInput" data-i18n="chooseFile">Choose File</label>
-              <input id="importDataInput" class="plain-file-input" type="file" accept="application/json,.json">
-              <strong id="selectedImportFileName" class="selected-file-name" data-empty-text="true">No file selected</strong>
-            </div>
-            <p class="drop-hint" data-i18n="dropHint">You can also drag a .json file here.</p>
-          </div>
-          <div class="backup-step">
-            <span data-i18n="importSelectedFile">Import selected file</span>
-            <button class="secondary-button" id="importDataButton" type="button" data-i18n="importData">Import Data</button>
-          </div>
-        </div>
-        </details>
-        <button class="danger-button clear-data-button" id="clearLocalDataButton" type="button" data-i18n="clearBrowserData">Clear Browser Data</button>
-      </details>
-      <p id="backupStatus" class="backup-status" aria-live="polite"></p>
     </section>
 
     <section class="toolbar" aria-label="Search and filters">
@@ -230,7 +210,37 @@ Requirements:
         <p id="visibleCount">Showing 0 items</p>
       </div>
       <div id="experienceList" class="experience-list"></div>
-      <p id="emptyState" class="empty-state">No experiences yet. Import sample data or add your own non-sensitive sample experience.</p>
+      <p id="emptyState" class="empty-state">No experiences yet. Add your first experience, or load fictional demo experiences to try the workflow.</p>
+    </section>
+
+    <section class="backup-panel panel" aria-labelledby="dataTitle">
+      <details class="advanced-backup">
+        <summary id="dataTitle" data-i18n="advancedDataTitle">Advanced: Local Data Management</summary>
+        <p class="export-note" data-i18n="advancedDataHelp">Import sample JSON, export local career workspace data, or clear browser storage.</p>
+
+        <button class="primary-button" id="exportDataButton" type="button" data-i18n="exportLocalData">Export Local Data</button>
+
+        <details class="advanced-backup">
+          <summary data-i18n="importJsonData">Import JSON Data</summary>
+          <div class="backup-steps">
+            <div class="backup-step import-step" id="importDropZone">
+              <span data-i18n="selectJsonFile">Select JSON file</span>
+              <div class="import-file-row">
+                <label class="file-pick-button" for="importDataInput" data-i18n="chooseFile">Choose File</label>
+                <input id="importDataInput" class="plain-file-input" type="file" accept="application/json,.json">
+                <strong id="selectedImportFileName" class="selected-file-name" data-empty-text="true">No file selected</strong>
+              </div>
+              <p class="drop-hint" data-i18n="dropHint">You can also drag a .json file here.</p>
+            </div>
+            <div class="backup-step">
+              <span data-i18n="importSelectedFile">Import selected file</span>
+              <button class="secondary-button" id="importDataButton" type="button" data-i18n="importData">Import Data</button>
+            </div>
+          </div>
+        </details>
+        <button class="danger-button clear-data-button" id="clearLocalDataButton" type="button" data-i18n="clearBrowserData">Clear Browser Data</button>
+      </details>
+      <p id="backupStatus" class="backup-status" aria-live="polite"></p>
     </section>
   </main>
 
