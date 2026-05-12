@@ -1,14 +1,305 @@
 const STORAGE_KEY = "careerFitWorkflowToolExperiences";
 const STATS_KEY = "careerFitWorkflowToolUsageStats";
 const LANGUAGE_KEY = "careerFitWorkflowToolLanguage";
+const FEEDBACK_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe-9sNinc3KIL3pkSksivMAgfycZSV1rUrCFSdFtoWrJIlCHQ/viewform";
 const EXPERIENCE_TYPES = ["实习", "兼职", "正式工作", "项目经历", "校园经历"];
 const LEGACY_EXPERIENCE_TYPES = ["课程项目", "AI 项目", "学生经历", "其他"];
 const ALL_EXPERIENCE_TYPES = [...EXPERIENCE_TYPES, ...LEGACY_EXPERIENCE_TYPES];
 const ABILITY_TAGS = ["沟通", "执行", "数据", "内容", "运营", "AI", "解决问题", "团队协作", "学习能力", "组织协调", "责任心", "抗压能力", "逻辑分析", "细节意识", "结果导向"];
 const DIRECTION_TAGS = ["内容 / 新媒体", "运营", "市场 / 品牌", "产品", "销售 / 商务", "数据 / 分析", "AI / 自动化", "人力 / 行政", "财务 / 金融", "供应链 / 制造", "咨询 / 战略", "技术 / 互联网", "教育 / 培训", "设计 / 创意", "Software Engineering", "Data Analytics", "AI / Machine Learning", "Cybersecurity", "IT Support", "Engineering", "Research / Lab", "Quality / Testing", "Healthcare / Life Science", "其他"];
+const DEMO_JOB_DESCRIPTIONS = [
+  {
+    id: "content-operations",
+    enLabel: "Content Operations Intern",
+    zhLabel: "内容运营实习生",
+    expectedTopMatch: "Fictional Campus Content Operations Project",
+    enText: `Role: Content Operations Intern
+
+Responsibilities:
+- Support Xiaohongshu, Douyin, and WeChat content planning and publishing
+- Organize topic ideas, short-video materials, and weekly content performance data
+- Track comments and user feedback to improve engagement
+- Assist campaign execution, content calendar updates, and post-campaign review
+
+Requirements:
+- Strong writing, communication, and information organization skills
+- Familiar with social media platforms and short-video workflows
+- Detail-oriented, reliable, and able to execute on schedule
+- Experience with Excel, Canva, CapCut, or AI tools is a plus`,
+    zhText: `岗位名称：内容运营实习生
+
+岗位职责：
+1. 协助负责小红书、抖音、微信公众号等平台的内容运营；
+2. 参与选题整理、内容排期、文案撰写和短视频素材归档；
+3. 跟进用户评论和内容反馈，协助提升内容互动和传播效果；
+4. 使用 Excel 或 AI 工具整理内容表现记录和复盘信息；
+5. 配合团队完成活动推广、内容复盘和跨部门沟通。
+
+任职要求：
+1. 具备良好的文字表达和信息整理能力；
+2. 熟悉短视频平台和社交媒体内容形式；
+3. 能使用 Excel、剪映、Canva、ChatGPT 或其他内容工具；
+4. 具备执行力、责任心和基础数据意识；
+5. 有内容运营、新媒体运营或活动执行经验者优先。`
+  },
+  {
+    id: "software-engineering",
+    enLabel: "Frontend Developer Intern",
+    zhLabel: "前端开发实习生",
+    expectedTopMatch: "Fictional AI Resume Workflow Prototype",
+    enText: `Role: Frontend Developer Intern
+
+Responsibilities:
+- Build and maintain interactive web interface components
+- Work with JavaScript, HTML, CSS, and frontend frameworks
+- Connect user inputs with local or API-based data flows
+- Debug interface issues and improve usability
+- Write simple documentation for features and user flows
+
+Requirements:
+- Basic understanding of JavaScript, HTML, and CSS
+- Familiarity with React, Vue, or similar frameworks is a plus
+- Ability to test and debug frontend interactions
+- Interest in user experience and workflow tools`,
+    zhText: `岗位名称：前端开发实习生
+
+岗位职责：
+1. 协助开发和维护网页端交互界面；
+2. 使用 HTML、CSS、JavaScript 或前端框架实现页面功能；
+3. 将用户输入、筛选条件和本地数据逻辑连接到页面流程中；
+4. 参与调试界面问题，优化基础交互体验；
+5. 编写简单功能说明或使用文档。
+
+任职要求：
+1. 了解 HTML、CSS 和 JavaScript 基础；
+2. 熟悉 React、Vue 或类似前端框架者优先；
+3. 具备基础调试能力和用户体验意识；
+4. 能根据需求拆解功能并完成简单实现；
+5. 有网页工具、课程项目或个人项目经验者优先。`
+  },
+  {
+    id: "data-analyst",
+    enLabel: "Data Analyst Intern",
+    zhLabel: "数据分析实习生",
+    expectedTopMatch: "Fictional Learning App User Research",
+    enText: `Role: Data Analyst Intern
+
+Responsibilities:
+- Clean and organise raw data for reporting
+- Use Excel, SQL, or Python to analyse trends
+- Build simple dashboards or reports
+- Track KPIs and support business decisions
+- Communicate findings to non-technical stakeholders
+
+Requirements:
+- Basic Excel and data analysis skills
+- SQL or Python experience is a plus
+- Ability to explain findings clearly
+- Attention to detail and logical thinking`,
+    zhText: `岗位名称：数据分析实习生
+
+岗位职责：
+1. 清洗和整理原始数据，支持日常报表和分析工作；
+2. 使用 Excel、SQL 或 Python 分析数据趋势和关键指标；
+3. 协助搭建简单看板或整理可视化图表；
+4. 跟踪 KPI 或业务指标，支持团队判断问题和机会；
+5. 将分析结果整理为清晰结论，向非技术同事说明发现。
+
+任职要求：
+1. 具备 Excel 和基础数据分析能力；
+2. 熟悉 SQL、Python、Tableau 或 Power BI 者优先；
+3. 具备逻辑思维、细节意识和问题拆解能力；
+4. 能用清晰语言解释数据发现；
+5. 有数据分析、调研或用户反馈整理经验者优先。`
+  },
+  {
+    id: "research-assistant",
+    enLabel: "Research Assistant",
+    zhLabel: "研究助理",
+    expectedTopMatch: "Fictional Learning App User Research",
+    enText: `Role: Research Assistant
+
+Responsibilities:
+- Collect and organise research materials
+- Support literature review and data coding
+- Prepare survey or interview notes
+- Assist with research documentation and reporting
+- Follow research ethics and data management guidelines
+
+Requirements:
+- Strong information organisation skills
+- Familiarity with academic research methods
+- Experience with survey, interview, or literature review is a plus
+- Attention to detail and clear writing ability`,
+    zhText: `岗位名称：研究助理
+
+岗位职责：
+1. 协助收集和整理研究资料；
+2. 参与文献综述、问卷数据整理或访谈记录归类；
+3. 协助完成数据编码、研究记录和项目文档整理；
+4. 根据研究要求维护资料准确性和流程规范；
+5. 支持研究报告、讨论材料或阶段性总结撰写。
+
+任职要求：
+1. 具备良好的信息整理和学术阅读能力；
+2. 熟悉问卷、访谈、文献综述或基础研究方法者优先；
+3. 具备细节意识、责任心和清晰写作能力；
+4. 能按照研究伦理和数据管理要求处理资料；
+5. 有课程研究、实验室、调研或论文项目经验者优先。`
+  },
+  {
+    id: "new-media-zh",
+    enLabel: "New Media Operations Assistant",
+    zhLabel: "新媒体运营助理",
+    expectedTopMatch: "Fictional Campus Content Operations Project",
+    enText: `Role: New Media Operations Assistant
+
+Responsibilities:
+- Support daily content operations across Xiaohongshu, Douyin, and WeChat official account
+- Assist with topic planning, content scheduling, copywriting, and short-video material organisation
+- Track user comments and private-message feedback to improve content exposure and engagement
+- Support campaign promotion, livestream execution, content review, and cross-team communication
+- Use AI tools or data tools to improve content production and information organisation
+
+Requirements:
+- Strong writing, communication, and information organisation skills
+- Familiarity with short-video platforms and new media content formats
+- Ability to use Jianying, Excel, Canva, ChatGPT, or other content tools
+- Execution ability, responsibility, and basic data awareness
+- Content operations, short-video, or event execution experience is preferred`,
+    zhText: `岗位名称：新媒体运营助理
+
+岗位职责：
+1. 协助负责小红书、抖音、微信公众号等平台的日常内容运营；
+2. 参与选题策划、内容排期、文案整理、短视频素材归档和数据记录；
+3. 跟进用户评论和私信反馈，协助提升内容曝光和用户参与度；
+4. 配合团队完成活动推广、直播执行、内容复盘和跨部门沟通；
+5. 使用 AI 工具或数据分析工具提升内容生产和信息整理效率。
+
+任职要求：
+1. 具备良好的文字表达、信息整理和沟通能力；
+2. 熟悉短视频平台和新媒体内容形式；
+3. 能使用剪映、Excel、Canva、ChatGPT 或其他 AI 工具；
+4. 具备执行力、责任心和基础数据意识；
+5. 有内容运营、短视频或活动执行经验者优先。`
+  }
+];
+const DEMO_EXPERIENCES_BY_LANGUAGE = {
+  en: [
+    {
+      id: "demo-content-operations",
+      isDemo: true,
+      demoKey: "campus-content-operations",
+      demoLanguage: "en",
+      title: "Fictional Campus Content Operations Project",
+      time: "2025.03 - 2025.06",
+      type: "Project",
+      tags: ["Content", "Operations", "Data", "Execution", "Communication"],
+      directionTags: ["Content / New Media", "Marketing / Branding", "Operations"],
+      experienceDescription: "Worked on a fictional campus content operations project, organising topic feedback, short-video materials, and content performance notes. Reviewed around 60 user comments, categorised issues related to topics, messaging, posting time, and engagement, and used Excel to record content performance. The team adjusted 4 topic directions based on the review, and engagement increased by around 18% over the following two weeks.",
+      situation: "Worked on a fictional campus content operations project focused on improving content engagement.",
+      task: "Organised topic feedback, short-video materials, and content performance notes.",
+      action: "Reviewed around 60 user comments, categorised issues related to topics, messaging, posting time, and engagement, and used Excel to record content performance.",
+      result: "The team adjusted 4 topic directions based on the review, and engagement increased by around 18% over the following two weeks.",
+      createdAt: "2026-01-15T09:00:00.000Z"
+    },
+    {
+      id: "demo-product-research",
+      isDemo: true,
+      demoKey: "learning-app-user-research",
+      demoLanguage: "en",
+      title: "Fictional Learning App User Research",
+      time: "2025.07 - 2025.08",
+      type: "Project",
+      tags: ["Data", "Logical Analysis", "Problem-solving", "Attention to Detail"],
+      directionTags: ["Product", "Data / Analytics"],
+      experienceDescription: "Supported a fictional learning app prototype research project by reviewing 80 student survey responses and 12 interview notes. Categorised feedback into onboarding, course search, learning reminders, and progress tracking issues, then helped create a prioritised improvement list. The team reduced the new-user onboarding flow from 6 screens to 4 screens, shortening prototype testing time by about 25%.",
+      situation: "Supported a fictional learning app prototype research project focused on onboarding and usability issues.",
+      task: "Reviewed 80 student survey responses and 12 interview notes.",
+      action: "Categorised feedback into onboarding, course search, learning reminders, and progress tracking issues, then helped create a prioritised improvement list.",
+      result: "The team reduced the new-user onboarding flow from 6 screens to 4 screens, shortening prototype testing time by about 25%.",
+      createdAt: "2026-01-16T09:00:00.000Z"
+    },
+    {
+      id: "demo-ai-workflow",
+      isDemo: true,
+      demoKey: "ai-resume-workflow-prototype",
+      demoLanguage: "en",
+      title: "Fictional AI Resume Workflow Prototype",
+      time: "2025.10 - 2025.11",
+      type: "AI Project",
+      tags: ["AI", "Problem-solving", "Learning Agility", "Execution", "Operations"],
+      directionTags: ["Software Engineering", "AI / Automation", "Tech / Internet"],
+      experienceDescription: "Built a fictional AI-assisted resume workflow prototype to help users structure experiences, compare them with job descriptions, and draft resume bullet points. Tested the workflow with small user samples, collected feedback on unclear steps and output quality, and iterated on the experience input, JD matching, and bullet generation logic.",
+      situation: "Built a fictional AI-assisted resume workflow prototype for career-material drafting.",
+      task: "Helped users structure experiences, compare them with job descriptions, and draft resume bullet points.",
+      action: "Tested the workflow with small user samples, collected feedback on unclear steps and output quality, and iterated on the experience input, JD matching, and bullet generation logic.",
+      result: "The prototype improved the clarity of the experience input, JD matching, and bullet generation workflow.",
+      createdAt: "2026-01-17T09:00:00.000Z"
+    }
+  ],
+  zh: [
+    {
+      id: "demo-content-operations",
+      isDemo: true,
+      demoKey: "campus-content-operations",
+      demoLanguage: "zh",
+      title: "虚构校园内容运营项目",
+      time: "2025.03 - 2025.06",
+      type: "项目经历",
+      tags: ["沟通", "执行", "数据", "内容", "运营"],
+      directionTags: ["内容 / 新媒体", "市场 / 品牌", "运营"],
+      experienceDescription: "我参与了一个虚构的校园内容运营项目，主要负责整理选题反馈、短视频素材和内容表现记录。我梳理了约 60 条用户评论，将问题按选题方向、表达方式、发布时间和互动表现进行分类，并使用 Excel 记录内容表现。团队根据复盘结果调整了 4 个选题方向，后续两周互动率提升约 18%。",
+      situation: "团队需要提升校园内容的互动表现，但用户反馈分散，缺少清晰整理。",
+      task: "我的任务是整理用户评论、内容素材和表现记录，帮助团队判断哪些选题和表达方式需要调整。",
+      action: "我梳理了约 60 条用户评论，按选题、表达、发布时间和互动问题分类，并使用 Excel 记录内容表现。",
+      result: "团队根据复盘结果调整了 4 个选题方向，后续两周互动率提升约 18%。",
+      createdAt: "2026-01-15T09:00:00.000Z"
+    },
+    {
+      id: "demo-product-research",
+      isDemo: true,
+      demoKey: "learning-app-user-research",
+      demoLanguage: "zh",
+      title: "虚构学习 App 用户研究项目",
+      time: "2025.07 - 2025.08",
+      type: "项目经历",
+      tags: ["数据", "逻辑分析", "沟通", "解决问题", "细节意识"],
+      directionTags: ["数据 / 分析", "产品", "Research / Lab"],
+      experienceDescription: "我参与了一个虚构学习 App 原型调研项目，协助整理 80 份学生问卷和 12 份访谈记录。我将反馈归类为新用户引导、课程搜索、学习提醒和进度追踪等问题，并协助形成优先级改进清单。团队根据研究结果将新用户引导流程从 6 个页面缩短到 4 个页面，原型测试时间减少约 25%。",
+      situation: "学习 App 原型在测试中出现新用户理解成本较高、路径较长的问题。",
+      task: "我的任务是整理问卷和访谈反馈，帮助团队识别主要用户体验问题。",
+      action: "我整理了 80 份问卷和 12 份访谈记录，将反馈归类为新用户引导、课程搜索、学习提醒和进度追踪等问题，并协助形成改进优先级。",
+      result: "团队将新用户引导流程从 6 个页面缩短到 4 个页面，原型测试时间减少约 25%。",
+      createdAt: "2026-01-16T09:00:00.000Z"
+    },
+    {
+      id: "demo-ai-workflow",
+      isDemo: true,
+      demoKey: "ai-resume-workflow-prototype",
+      demoLanguage: "zh",
+      title: "虚构 AI 简历工作流原型项目",
+      time: "2025.10 - 2025.11",
+      type: "项目经历",
+      tags: ["AI", "执行", "解决问题", "逻辑分析", "学习能力"],
+      directionTags: ["Software Engineering", "AI / 自动化", "技术 / 互联网"],
+      experienceDescription: "我搭建了一个虚构的 AI 辅助简历工作流原型，用于帮助用户结构化经历、对比岗位 JD，并生成简历 Bullet、面试回答和求职信素材初稿。我测试了经历录入、岗位匹配、输出生成和删除联动等核心流程，并根据反馈优化了中文界面、岗位标签和技术类岗位匹配逻辑。",
+      situation: "用户在准备简历和面试时，常常不知道如何把个人经历和目标岗位 JD 对齐。",
+      task: "我的任务是搭建一个本地网页原型，把经历录入、JD 分析、经历匹配和材料生成串成一个完整流程。",
+      action: "我设计并测试了经历录入、岗位匹配、简历 Bullet 生成、面试回答生成和删除联动等功能，并根据反馈优化中文界面和技术岗位匹配逻辑。",
+      result: "该原型完成了 GitHub Pages 公开测试版上线，并支持内容运营、市场、软件开发、数据分析和研究助理等多类岗位 demo 测试。",
+      createdAt: "2026-01-17T09:00:00.000Z"
+    }
+  ]
+};
+const DEMO_EXPERIENCES = DEMO_EXPERIENCES_BY_LANGUAGE.en;
 const INTERFACE_TEXT = {
   en: {
     mainTitle: "Career Experience Matcher",
+    feedbackButton: "Feedback",
+    giveFeedback: "Give Feedback",
+    feedbackNoteTitle: "Public beta: your feedback helps improve matching quality and bilingual output.",
+    feedbackPrivacyLine: "The feedback form does not ask for your name, email, resume, experience text, or job description.",
     languageLabel: "Language",
     experienceCountLabel: "experiences",
     privacyTitle: "Privacy-first career workspace",
@@ -27,10 +318,18 @@ const INTERFACE_TEXT = {
     action: "Action",
     result: "Result",
     addExperienceButton: "Add Experience",
+    demoWorkflowTitle: "Try the demo workflow",
+    demoWorkflowNote: "Demo experiences and demo JDs are fictional and safe for testing.",
+    demoStepOne: "Step 1: Load fictional demo experiences",
+    loadDemoExperiences: "Load Demo Experiences",
+    demoStepTwo: "Step 2: Choose a demo job description",
+    demoStepThree: "Step 3: Click Analyze And Match",
     jobMatchTitle: "Match Experiences To A Job Description",
     jobMatchHelp: "Paste a target JD. The tool identifies role signals and recommends the strongest experience materials.",
-    viewFictionalJd: "View fictional JD example",
-    useThisJd: "Use This JD",
+    demoJdTitle: "Try a demo job description",
+    demoJdChoose: "Choose a fictional JD:",
+    useSelectedDemoJd: "Use Selected Demo JD",
+    demoJdNote: "For the best demo result, load the fictional demo experiences first.",
     jobDescription: "Job description",
     clearJd: "Clear JD",
     analyzeAndMatch: "Analyze And Match",
@@ -53,7 +352,7 @@ const INTERFACE_TEXT = {
     directionFilter: "Direction filter",
     abilityFilter: "Ability filter",
     experienceLibrary: "Experience Library",
-    emptyState: "No experiences yet. Import sample data or add your own non-sensitive sample experience.",
+    emptyState: "No experiences yet.\nAdd your first experience, or load fictional demo experiences to try the workflow.",
     promptTitle: "Prompt",
     promptHelp: "Use this shape: In [context], I was responsible for [task]. I did [actions]. The result was [outcome or metric].",
     viewFictionalExample: "View fictional example",
@@ -80,6 +379,10 @@ Requirements:
   },
   zh: {
     mainTitle: "求职经历匹配工具",
+    feedbackButton: "反馈",
+    giveFeedback: "提交反馈",
+    feedbackNoteTitle: "Public Beta 测试中：你的反馈会帮助改进岗位匹配和中英文输出质量。",
+    feedbackPrivacyLine: "反馈表不会收集你的姓名、邮箱、简历内容、经历正文或岗位描述。",
     languageLabel: "语言",
     experienceCountLabel: "条经历",
     privacyTitle: "隐私优先的求职工作区",
@@ -98,10 +401,18 @@ Requirements:
     action: "行动",
     result: "结果",
     addExperienceButton: "添加经历",
+    demoWorkflowTitle: "试用完整演示流程",
+    demoWorkflowNote: "示例经历和示例 JD 均为虚构内容，仅用于测试流程。",
+    demoStepOne: "第一步：加载虚构示例经历",
+    loadDemoExperiences: "加载示例经历",
+    demoStepTwo: "第二步：选择示例岗位描述",
+    demoStepThree: "第三步：点击“分析岗位并匹配经历”",
     jobMatchTitle: "匹配岗位描述与经历",
     jobMatchHelp: "粘贴目标 JD，工具会识别岗位信号并推荐更适合使用的经历材料。",
-    viewFictionalJd: "查看虚构 JD 示例",
-    useThisJd: "使用这份 JD",
+    demoJdTitle: "试用示例岗位描述",
+    demoJdChoose: "选择一个虚构 JD：",
+    useSelectedDemoJd: "使用该示例 JD",
+    demoJdNote: "为了获得完整演示效果，请先加载虚构示例经历。",
     jobDescription: "岗位描述",
     clearJd: "清空 JD",
     analyzeAndMatch: "分析岗位并匹配经历",
@@ -124,7 +435,7 @@ Requirements:
     directionFilter: "岗位方向筛选",
     abilityFilter: "通用能力筛选",
     experienceLibrary: "经历库",
-    emptyState: "还没有经历。你可以导入示例数据，或添加一段不含敏感信息的样例经历。",
+    emptyState: "暂无经历。\n你可以添加第一段经历，或加载虚构示例经历来体验完整流程。",
     promptTitle: "提示",
     promptHelp: "可以按这个结构写：在[背景]下，我负责[任务]。我做了[行动]。结果是[成果或数据]。",
     viewFictionalExample: "查看虚构示例",
@@ -171,6 +482,12 @@ const STATUS_TEXT = {
     importFailed: "Import failed. Please upload a JSON file exported by this tool or the demo data file.",
     importCancelled: "Import cancelled.",
     dataImportedAnalyzeAgain: "Import successful. Please analyze the JD again.",
+    demoExperiencesLoaded: "Demo experiences loaded.",
+    demoExperiencesAlreadyLoaded: "Demo experiences are already loaded.",
+    demoExperiencesReplacedEnglish: "Demo experiences replaced with English version.",
+    demoExperiencesReplacedChinese: "Demo experiences replaced with Chinese version.",
+    demoJobLoaded: "Demo job description loaded.",
+    demoJobLoadedNoExperiences: "Demo JD loaded. Add or load demo experiences before running the match.",
     importedCount: (count) => `Import successful. Imported ${count} experience${count === 1 ? "" : "s"}.`,
     invalidJson: "Invalid JSON file.",
     noExperiencesArray: "No experiences array was found in this JSON file.",
@@ -205,6 +522,12 @@ const STATUS_TEXT = {
     importFailed: "导入失败。请上传本工具导出的 JSON 文件或示例数据文件。",
     importCancelled: "已取消导入。",
     dataImportedAnalyzeAgain: "导入成功。请重新分析 JD。",
+    demoExperiencesLoaded: "示例经历已加载。",
+    demoExperiencesAlreadyLoaded: "示例经历已加载，无需重复添加。",
+    demoExperiencesReplacedEnglish: "示例经历已切换为英文版本。",
+    demoExperiencesReplacedChinese: "示例经历已切换为中文版本。",
+    demoJobLoaded: "示例岗位描述已加载。",
+    demoJobLoadedNoExperiences: "示例 JD 已加载。请先添加经历或加载示例经历，再进行匹配。",
     importedCount: (count) => `导入成功，共导入 ${count} 段经历。`,
     invalidJson: "JSON 文件无效。",
     noExperiencesArray: "这个 JSON 文件中没有找到 experiences 数组。",
@@ -234,8 +557,11 @@ const outputLanguage = document.querySelector("#outputLanguage");
 const totalCount = document.querySelector("#totalCount");
 const visibleCount = document.querySelector("#visibleCount");
 const jobDescription = document.querySelector("#jobDescription");
+const loadDemoExperiencesButton = document.querySelector("#loadDemoExperiencesButton");
+const demoExperienceStatus = document.querySelector("#demoExperienceStatus");
+const demoJobSelect = document.querySelector("#demoJobSelect");
 const useSampleJobButton = document.querySelector("#useSampleJobButton");
-const sampleJobDescription = document.querySelector("#sampleJobDescription");
+const demoJobStatus = document.querySelector("#demoJobStatus");
 const analyzeMatchButton = document.querySelector("#analyzeMatchButton");
 const clearJobDescriptionButton = document.querySelector("#clearJobDescriptionButton");
 const clearMatchResultsButton = document.querySelector("#clearMatchResultsButton");
@@ -272,6 +598,7 @@ clearJobDescriptionButton.addEventListener("click", clearJobDescriptionAndResult
 clearMatchResultsButton.addEventListener("click", () => clearMatchResults(statusText("jobResultsCleared"), { confirm: true }));
 reanalyzeMatchButton.addEventListener("click", analyzeJobMatch);
 useSampleJobButton.addEventListener("click", useSampleJobDescription);
+loadDemoExperiencesButton.addEventListener("click", loadDemoExperiences);
 outputLanguage.addEventListener("change", handleOutputLanguageChange);
 exportDataButton.addEventListener("click", exportData);
 importDataInput.addEventListener("change", handleImportFileSelection);
@@ -283,6 +610,7 @@ importDropZone.addEventListener("drop", handleImportDrop);
 clearLocalDataButton.addEventListener("click", clearLocalData);
 
 applyStoredLanguagePreference();
+renderDemoJobOptions();
 renderTagOptions();
 renderFilterOptions();
 updateInterfaceLanguage();
@@ -489,14 +817,15 @@ function handleListClick(event) {
   }
 }
 
-function handleMatchResultClick(event) {
+async function handleMatchResultClick(event) {
   const button = event.target.closest("button");
   if (!button) return;
 
   if (button.dataset.action === "copy-match-output") {
     const output = button.closest(".match-output");
     const text = output.querySelector("pre").textContent;
-    copyText(text, button, getOutputLanguage() === "en" ? "Copied" : "已复制");
+    await copyText(text, button, getOutputLanguage() === "en" ? "Copied" : "已复制");
+    showCopyFeedbackPrompt(output);
     updateStats({ copyCount: 1 });
   }
 
@@ -575,7 +904,26 @@ async function copyOutput(card, button) {
   window.setTimeout(() => {
     button.textContent = originalText;
   }, 1200);
+  showCopyFeedbackPrompt(card.querySelector(".output-box"));
   updateStats({ copyCount: 1 });
+}
+
+function showCopyFeedbackPrompt(container) {
+  if (!container) return;
+  let prompt = container.querySelector(".copy-feedback-prompt");
+  if (!prompt) {
+    prompt = document.createElement("p");
+    prompt.className = "copy-feedback-prompt";
+    container.appendChild(prompt);
+  }
+
+  const language = getOutputLanguage();
+  const message = language === "en"
+    ? "Copied. If this output helped, please leave quick feedback."
+    : "已复制。如果这个结果有帮助，欢迎提交一个快速反馈。";
+  const linkText = language === "en" ? "Give Feedback" : "提交反馈";
+  prompt.innerHTML = `${escapeHtml(message)} <a href="${FEEDBACK_FORM_URL}" target="_blank" rel="noopener noreferrer">${escapeHtml(linkText)}</a>`;
+  prompt.hidden = false;
 }
 
 function handleOutputLanguageChange() {
@@ -609,16 +957,27 @@ function updateInterfaceLanguage() {
     const key = node.dataset.i18nPlaceholder;
     if (copy[key]) node.placeholder = copy[key];
   });
-  if (sampleJobDescription && copy.sampleJobDescription) {
-    sampleJobDescription.textContent = copy.sampleJobDescription;
-  }
   updateLanguageOptionLabels(language);
+  renderDemoJobOptions();
   updateExperienceTypeSelectLabels();
   if (selectedImportFileName && !selectedImportFile) {
     selectedImportFileName.textContent = copy.noFileSelected;
   }
   if (emptyState) {
     emptyState.textContent = copy.emptyState;
+  }
+}
+
+function renderDemoJobOptions() {
+  if (!demoJobSelect) return;
+  const selectedValue = demoJobSelect.value || DEMO_JOB_DESCRIPTIONS[0]?.id;
+  const language = getOutputLanguage();
+  demoJobSelect.innerHTML = DEMO_JOB_DESCRIPTIONS.map((demo) => {
+    const label = language === "zh" ? demo.zhLabel : demo.enLabel;
+    return `<option value="${escapeHtml(demo.id)}">${escapeHtml(label)}</option>`;
+  }).join("");
+  if (DEMO_JOB_DESCRIPTIONS.some((demo) => demo.id === selectedValue)) {
+    demoJobSelect.value = selectedValue;
   }
 }
 
@@ -790,6 +1149,7 @@ function createExperienceCard(experience) {
           <textarea readonly></textarea>
         </label>
         <button class="copy-button" type="button" data-action="copy">${labels.copy}</button>
+        <p class="copy-feedback-prompt" hidden></p>
       </div>
     </article>
   `;
@@ -1945,11 +2305,75 @@ function capitalizeFirst(value) {
 }
 
 function useSampleJobDescription() {
-  jobDescription.value = sampleJobDescription.textContent.trim();
+  const selectedDemo = DEMO_JOB_DESCRIPTIONS.find((demo) => demo.id === demoJobSelect?.value) || DEMO_JOB_DESCRIPTIONS[0];
+  const selectedText = getOutputLanguage() === "zh" ? selectedDemo?.zhText : selectedDemo?.enText;
+  jobDescription.value = selectedText?.trim() || selectedDemo?.enText?.trim() || "";
+  if (demoJobStatus) {
+    demoJobStatus.textContent = experiences.length ? statusText("demoJobLoaded") : statusText("demoJobLoadedNoExperiences");
+    demoJobStatus.classList.remove("is-error");
+  }
   if (hasCurrentMatchResults()) {
     clearMatchResults(statusText("jdUpdatedCleared"));
   }
   jobDescription.focus();
+}
+
+function loadDemoExperiences() {
+  const language = getOutputLanguage();
+  const localizedDemoExperiences = getLocalizedDemoExperiences(language);
+  const demoKeys = new Set(localizedDemoExperiences.map((experience) => experience.demoKey));
+  const existingDemoExperiences = experiences.filter((experience) => demoKeys.has(getExperienceDemoKey(experience)));
+  const isSameLanguageLoaded = localizedDemoExperiences.every((demoExperience) => {
+    const existingExperience = existingDemoExperiences.find((experience) => getExperienceDemoKey(experience) === demoExperience.demoKey);
+    return existingExperience && (existingExperience.demoLanguage === language || existingExperience.title === demoExperience.title);
+  });
+
+  if (isSameLanguageLoaded && existingDemoExperiences.length === localizedDemoExperiences.length) {
+    setDemoExperienceStatus(statusText("demoExperiencesAlreadyLoaded"));
+    return;
+  }
+
+  const normalizedDemoExperiences = localizedDemoExperiences
+    .map(normalizeExperience)
+    .filter(isValidExperience);
+  const userExperiences = experiences.filter((experience) => !demoKeys.has(getExperienceDemoKey(experience)));
+  const hasExistingDemoExperiences = existingDemoExperiences.length > 0;
+
+  experiences = [...normalizedDemoExperiences, ...userExperiences];
+  saveExperiences();
+  renderExperiences();
+  setDemoExperienceStatus(hasExistingDemoExperiences
+    ? statusText(language === "zh" ? "demoExperiencesReplacedChinese" : "demoExperiencesReplacedEnglish")
+    : statusText("demoExperiencesLoaded"));
+}
+
+function setDemoExperienceStatus(message, isError = false) {
+  if (!demoExperienceStatus) return;
+  demoExperienceStatus.textContent = message;
+  demoExperienceStatus.classList.toggle("is-error", isError);
+}
+
+function getLocalizedDemoExperiences(language = getOutputLanguage()) {
+  return DEMO_EXPERIENCES_BY_LANGUAGE[language] || DEMO_EXPERIENCES_BY_LANGUAGE.en;
+}
+
+function getExperienceDemoKey(experience) {
+  if (!experience) return "";
+  if (experience.demoKey) return experience.demoKey;
+  const id = String(experience.id || "");
+  const title = String(experience.title || "");
+  const legacyDemoMap = {
+    "demo-content-operations": "campus-content-operations",
+    "demo-product-research": "learning-app-user-research",
+    "demo-ai-workflow": "ai-resume-workflow-prototype",
+    "Fictional Campus Content Operations Project": "campus-content-operations",
+    "虚构校园内容运营项目": "campus-content-operations",
+    "Fictional Learning App User Research": "learning-app-user-research",
+    "虚构学习 App 用户研究项目": "learning-app-user-research",
+    "Fictional AI Resume Workflow Prototype": "ai-resume-workflow-prototype",
+    "虚构 AI 简历工作流原型项目": "ai-resume-workflow-prototype"
+  };
+  return legacyDemoMap[id] || legacyDemoMap[title] || "";
 }
 
 function handleJobDescriptionInput() {
@@ -2242,6 +2666,7 @@ function createMatchOutputBlock(title, content, copyLabel = "复制", note = "")
       </div>
       ${note ? `<span class="bullet-direction-note">${escapeHtml(note)}</span>` : ""}
       <pre>${escapeHtml(content)}</pre>
+      <p class="copy-feedback-prompt" hidden></p>
     </div>
   `;
 }
@@ -2757,6 +3182,9 @@ function parseImportedExperiences(fileContent) {
 function normalizeExperience(experience) {
   return {
     id: String(experience.id || Date.now() + Math.random()),
+    isDemo: Boolean(experience.isDemo),
+    demoKey: String(experience.demoKey || "").trim(),
+    demoLanguage: String(experience.demoLanguage || "").trim(),
     title: String(experience.title || "").trim(),
     time: String(experience.time || "").trim(),
     type: normalizeExperienceType(experience.type),
@@ -3028,6 +3456,7 @@ function clearLocalData() {
   importDataInput.value = "";
   selectedImportFileName.textContent = INTERFACE_TEXT[getOutputLanguage()].noFileSelected;
   setStarGenerationStatus("");
+  setDemoExperienceStatus("");
   clearMatchResults(statusText("localDataCleared"));
   setBackupStatus(statusText("localDataCleared"));
   updateInterfaceLanguage();
